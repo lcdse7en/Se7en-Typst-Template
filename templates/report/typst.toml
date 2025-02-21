@@ -1,0 +1,10 @@
+[package]
+name = "se7en-report"
+entrypoint = "lib.typ"
+description = "Unofficial template for writing a report in the se7en department of Computer Science design."
+categories = ["report"]
+
+[template]
+path = "src"
+entrypoint = "main.typ"
+thumbnail = "thumbnail.png"
