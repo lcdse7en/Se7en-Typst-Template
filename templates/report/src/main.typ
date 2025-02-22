@@ -6,10 +6,11 @@
 #show: report.with(
   language: "en",
   title: "Answer to the Ultimate Question of Life, the Universe, and Everything",
-  author:"The Computer",
+  author: "The Computer",
   faculty: "Engineering and Computer Science",
   department: "Computer Science",
   include-declaration-of-independent-processing: true,
+  submission-date: datetime(day: 1, month: 3, year: 2024),
 )
 
 // Enable glossary

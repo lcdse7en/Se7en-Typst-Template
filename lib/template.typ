@@ -30,7 +30,13 @@
   // Set the document's basic properties.
   set document(author: author, title: title, date: submission-date)
   set page(
-    margin: (left: 31.5mm, right: 31.5mm, top: PAGE_MARGIN_TOP, bottom: 56mm),
+    paper: "a4",
+    margin: (
+      left: 15mm,
+      right: 15mm,
+      top: PAGE_MARGIN_TOP,
+      bottom: 20mm,
+    ),
     numbering: "1",
     number-align: right,
     binding: left,
@@ -89,9 +95,49 @@
       )
     },
   )
+
+  let fakepar = context {
+    let b = par(box())
+    b
+    v(-measure(b + b).height)
+  }
+
+  // 解决首行缩进所带来的代码块问题
+  // https://stormckey.github.io/PeiPei/typst
+  show math.equation.where(block: true): it => it + fakepar
+  show heading: it => it + fakepar // 标题后缩进
+  show figure: it => it + fakepar // 图表后缩进
+  show enum.item: it => it + fakepar
+  show list.item: it => it + fakepar // 列表后缩进
+
   set par(leading: 9pt, first-line-indent: (amount: 2em, all: true))
-  set text(font: "New Computer Modern", lang: language, size: 10.85pt)
+  // set text(font: "New Computer Modern", lang: language, size: 10.85pt)
+  set text(
+    font: ("New Computer Modern", "SimSun"),
+    lang: language,
+    size: 10.85pt,
+  ) // region: "cn",
   set heading(numbering: "1.1")
+
+  // 数学公式部分
+  // 重置每个章节的公式计数器
+  show heading.where(level: 1): it => {
+    counter(math.equation).update(0)
+    it
+  }
+
+  // 让数学公式的显示以 (1.1) 来表现
+  set math.equation(
+    numbering: n => {
+      numbering("(1.1)", counter(heading).get().first(), n)
+    },
+  )
+
+  // 超链接设置颜色和下划线
+  show link: {
+    underline.with(stroke: rgb("#0074d9"), offset: 2pt)
+  }
+  show link: set text(blue)
 
   // Configure headings
   let font_size = 10pt
