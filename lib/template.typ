@@ -348,7 +348,7 @@
       below: bottom_margin,
     )
 
-    align(center)[#it]
+    align(left)[#it]
   }
 
   // Configure h3
