@@ -238,6 +238,24 @@
   }
   show link: set text(blue)
 
+  // 脚注のスタイルを設定
+  set footnote(numbering: sym.dagger + "1")
+  set footnote.entry(separator: line(length: 100%, stroke: 0.5pt))
+  show footnote: it => {
+    set text(size: 11pt)
+    it
+  }
+  show footnote.entry: it => {
+    set text(size: 6pt)
+
+    grid(
+      columns: (auto, 1fr),
+      gutter: 1em,
+      numbering(sym.dagger + "1", ..counter(footnote).at(it.note.location())),
+      it.note.body,
+    )
+  }
+
   // 图标设置
   let icon(path) = box(
     baseline: 0.125em,
