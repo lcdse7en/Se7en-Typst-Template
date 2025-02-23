@@ -5,7 +5,6 @@
   faculty: "",
   department: "",
   include-declaration-of-independent-processing: false,
-  submission-date: datetime(day: 1, month: 3, year: 2024),
   body,
 ) = {
   import "template.typ": template
@@ -17,9 +16,9 @@
 
     language: language,
 
-    title-de: title,
-    keywords-de: none,
-    abstract-de: none,
+    title-zh: title,
+    keywords-zh: none,
+    abstract-zh: none,
 
     title-en: title,
     keywords-en: none,
@@ -31,16 +30,16 @@
     study-course: none,
     supervisors: (),
     include-declaration-of-independent-processing: include-declaration-of-independent-processing,
-    submission-date: submission-date,
+    submission-date: auto,
     body,
   )
 }
 
 #let bachelor-thesis(
   language: "en",
-  title-de: "",
-  keywords-de: none,
-  abstract-de: none,
+  title-zh: "",
+  keywords-zh: none,
+  abstract-zh: none,
   title-en: none,
   keywords-en: none,
   abstract-en: none,
@@ -62,9 +61,9 @@
 
     language: language,
 
-    title-de: title-de,
-    keywords-de: keywords-de,
-    abstract-de: abstract-de,
+    title-zh: title-de,
+    keywords-zh: keywords-de,
+    abstract-zh: abstract-de,
 
     title-en: title-en,
     keywords-en: keywords-en,
@@ -83,9 +82,9 @@
 
 #let master-thesis(
   language: "en",
-  title-de: "",
-  keywords-de: none,
-  abstract-de: none,
+  title-zh: "",
+  keywords-zh: none,
+  abstract-zh: none,
   title-en: none,
   keywords-en: none,
   abstract-en: none,
@@ -107,9 +106,9 @@
 
     language: language,
 
-    title-de: title-de,
-    keywords-de: keywords-de,
-    abstract-de: abstract-de,
+    title-zh: title-de,
+    keywords-zh: keywords-de,
+    abstract-zh: abstract-de,
 
     title-en: title-en,
     keywords-en: keywords-en,

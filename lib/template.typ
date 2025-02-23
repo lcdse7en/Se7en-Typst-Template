@@ -4,9 +4,9 @@
   is-bachelor-thesis: true,
   is-report: false,
   language: "en",
-  title-de: "",
-  keywords-de: none,
-  abstract-de: none,
+  title-zh: "",
+  keywords-zh: none,
+  abstract-zh: none,
   title-en: none,
   keywords-en: none,
   abstract-en: none,
@@ -15,14 +15,14 @@
   department: "",
   study-course: "",
   supervisors: (),
-  submission-date: none,
+  submission-date: "",
   include-declaration-of-independent-processing: false,
   body,
 ) = {
   let THESIS_HEADING_EXTRA_TOP_MARGIN = 70pt
   let PAGE_MARGIN_TOP = 37mm
 
-  let title = title-de
+  let title = title-zh
   if language == "en" {
     title = title-en
   }
@@ -135,9 +135,46 @@
 
   // 超链接设置颜色和下划线
   show link: {
-    underline.with(stroke: rgb("#0074d9"), offset: 2pt)
+    underline.with(stroke: rgb("#0074d9"), offset: 3pt)
   }
   show link: set text(blue)
+
+  // 图标设置
+  let icon(path) = box(
+    baseline: 0.125em,
+    height: 0.8em,
+    width: 1.0em,
+    align(center + horizon, image(path)),
+  )
+
+  let faGithub = icon("icons/fa-github.svg")
+  let faLinux = icon("icons/fa-linux.svg")
+  let faGmail = icon("icons/fa-gmail.svg")
+  let faQQ = icon("icons/fa-qq.svg")
+  let faWechat = icon("icons/fa-weixin.svg")
+
+  show "Github": githubUrl => box[
+    // #box(faGithub) #githubUrl
+    #box(faGithub)
+  ]
+
+  show "Linux": name => box[
+    // #box(faLinux) #name
+    #box(faLinux)
+  ]
+
+  show "Gmail": name => box[
+    // #box(faGmail) #name
+    #box(faGmail)
+  ]
+
+  show "QQ": name => box[
+    #box(faQQ)
+  ]
+
+  show "Wechat": name => box[
+    #box(faWechat)
+  ]
 
   // Configure headings
   let font_size = 10pt
@@ -223,7 +260,7 @@
   )
 
   // Abstract
-  if abstract-de != none or abstract-en != none {
+  if abstract-zh != none or abstract-en != none {
     import "pages/abstract.typ": abstract_page
     if (language == "en") {
       abstract_page(
@@ -237,9 +274,9 @@
     abstract_page(
       language: "de",
       author: author,
-      title: title-de,
-      keywords: keywords-de,
-      abstract: abstract-de,
+      title: title-zh,
+      keywords: keywords-zh,
+      abstract: abstract-zh,
     )
   }
 
