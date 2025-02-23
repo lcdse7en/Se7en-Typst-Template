@@ -14,6 +14,11 @@
   show outline.entry.where(level: 1): set text(weight: "bold")
   show outline.entry.where(level: 1): set block(above: 16pt)
 
+  show outline.entry.where(level: 1): it => {
+    // 一级标题加粗
+    text(font: ("Times New Roman", "SimSun"))[#strong[#it]]
+  }
+
   outline(
     depth: 3,
     indent: auto,

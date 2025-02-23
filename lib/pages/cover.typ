@@ -42,6 +42,7 @@ stroke: (
   study-course: "",
   supervisors: (),
   submission-date: "",
+  date: "",
 ) = {
   // Set the document's basic properties.
   set page(
@@ -74,7 +75,7 @@ stroke: (
         v(2mm)
       },
       // Author
-      text(author, size: 11pt),
+      text(author, size: 11pt, weight: "bold"),
       v(13mm),
       // Title
       CrossLine,
@@ -83,7 +84,7 @@ stroke: (
         #par(
           first-line-indent: 0em,
           leading: 9pt,
-          text(title, size: 22pt, weight: 500),
+          text(title, size: 22pt, weight: "bold"),
         )
       ],
       v(-20pt),
@@ -95,7 +96,11 @@ stroke: (
       text(translations.faculty-of + " " + faculty, size: 11pt, weight: "bold"),
       v(2mm),
       // Department
-      text(translations.department-of + " " + department, size: 11pt),
+      text(
+        translations.department-of + " " + department,
+        size: 11pt,
+        weight: "bold",
+      ),
       v(2mm),
       link("https://github.com/lcdse7en")[
         #align(right)[
@@ -117,6 +122,12 @@ stroke: (
       v(2mm),
       align(right)[
         Wechat se7enlcd
+      ],
+      v(6mm),
+      align(center)[
+        #text(weight: "bold", size: 11pt)[
+          #date
+        ]
       ],
     ),
   )

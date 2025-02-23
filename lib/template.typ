@@ -15,7 +15,8 @@
   department: "",
   study-course: "",
   supervisors: (),
-  submission-date: "",
+  submission-date: none,
+  date: "",
   include-declaration-of-independent-processing: false,
   body,
 ) = {
@@ -26,6 +27,9 @@
   if language == "en" {
     title = title-en
   }
+
+  import "@preview/cuti:0.3.0": show-cn-fakebold
+  show: show-cn-fakebold
 
   // Set the document's basic properties.
   set document(author: author, title: title, date: submission-date)
@@ -189,7 +193,7 @@
   }
 
   // 見出しのナンバリングとフォントを設定
-  // show heading: set text(font: fonts.sans-serif)
+  show heading: set text(weight: "bold")
 
   // 章の見出し
   show heading.where(level: 1): it => {
@@ -201,7 +205,7 @@
 
     // 右寄せにする
     set align(right)
-    set text(size: 20pt)
+    set text(size: 20pt, weight: "bold")
 
     v(3%)
     // 章番号を表示
@@ -379,6 +383,7 @@
     study-course: study-course,
     supervisors: supervisors,
     submission-date: submission-date,
+    date: date,
   )
 
   // Abstract
@@ -432,6 +437,10 @@
 
   // Declaration of independent processing
   counter(heading).update(0)
+  show heading.where(level: 1): it => {
+    set align(center)
+    it.body
+  }
   if include-declaration-of-independent-processing {
     pagebreak(weak: true)
     import "pages/declaration_of_independent_processing.typ": (

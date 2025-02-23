@@ -79,23 +79,22 @@
   ),
   declaration-of-independent-processing: value(
     en: "Declaration of Independent Processing",
-    zh: "独立加工声明",
+    zh: "独立创作声明",
   ),
   declaration-of-independent-processing-content: value(
     en: "I hereby certify that I wrote this work independently without any outside help and only used the resources specified. Passages taken literally or figuratively from other works are identified by citing the sources.",
-    zh: "Hiermit versichere ich, dass ich die vorliegende Arbeit ohne fremde Hilfe selbständig verfasst und nur die angegebenen Hilfsmittel benutzt habe. Wörtlich oder dem Sinn
-nach aus anderen Werken entnommene Stellen sind unter Angabe der Quellen kenntlich gemacht.",
+    zh: "我特此证明，我是在没有任何外部帮助的情况下独立撰写本作品的，并且只使用了指定的资源。 从其他作品中按字面意思或比喻摘录的段落均注明出处。",
   ),
   place: value(
     en: "Place",
-    zh: "Ort",
+    zh: "地点",
   ),
   date: value(
     en: "Date",
-    zh: "Datum",
+    zh: "日期",
   ),
   signature: value(
     en: "Original Signature",
-    zh: "Unterschrift im Original",
+    zh: "原始签名",
   ),
 )
