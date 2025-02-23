@@ -79,7 +79,7 @@
   ),
   declaration-of-independent-processing: value(
     en: "Declaration of Independent Processing",
-    zh: "Erklärung zur selbstständigen Bearbeitung",
+    zh: "独立加工声明",
   ),
   declaration-of-independent-processing-content: value(
     en: "I hereby certify that I wrote this work independently without any outside help and only used the resources specified. Passages taken literally or figuratively from other works are identified by citing the sources.",

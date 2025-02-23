@@ -109,27 +109,126 @@
   show figure: it => it + fakepar // 图表后缩进
   show enum.item: it => it + fakepar
   show list.item: it => it + fakepar // 列表后缩进
+  show math.equation: set text(
+    font: (
+      "New Computer Modern Math",
+      "DejaVu Sans",
+      "Yu Gothic",
+    ),
+  )
+  show figure.where(kind: table): set figure(supplement: "表")
+  show figure.where(kind: table): set figure.caption(position: top)
+  show table: it => {
+    // 表内の文字は少し小さくする
+    set text(size: 8pt)
+    // justifyだとあまりきれいじゃないので無効化
+    set par(justify: false)
+    it
+  }
+  show figure.where(kind: image): set figure(supplement: "图")
+  show figure.caption: it => {
+    set text(size: 8pt)
+    set align(center)
+    it
+  }
+
+  // set math.equation(numbering: numbering.with("(1.1)"), supplement: "式")
+  // 让数学公式的显示以 (1.1) 来表现
+  // set math.equation(
+  //   numbering: n => {
+  //     numbering("(1.1)", counter(heading).get().first(), n)
+  //   },
+  //   supplement: "式",
+  // )
+  set math.equation(
+    numbering: (..num) => context {
+      let current-chapter-num = counter(heading).get().at(0)
+      numbering("(1.1)", current-chapter-num, ..num)
+    },
+  )
+
+  set figure(
+    numbering: (..num) => {
+      let current-chapter-num = counter(heading).get().at(0)
+      numbering("1-1", current-chapter-num, ..num)
+    },
+  )
+  set figure.caption(separator: h(1em))
 
   set par(leading: 9pt, first-line-indent: (amount: 2em, all: true))
   // set text(font: "New Computer Modern", lang: language, size: 10.85pt)
   set text(
-    font: ("New Computer Modern", "SimSun"),
+    font: ("Liberation Sans", "New Computer Modern", "SimSun"),
     lang: language,
     size: 10.85pt,
   ) // region: "cn",
   set heading(numbering: "1.1")
 
-  // 数学公式部分
-  // 重置每个章节的公式计数器
-  show heading.where(level: 1): it => {
-    counter(math.equation).update(0)
-    it
+  show ref: it => {
+    if it.element == none {
+      it
+      return
+    }
+
+    if it.element.func() == figure {
+      // 図表は強調表示する
+      set text(weight: "bold")
+      it
+    } else if it.element.func() == heading and it.element.level == 1 {
+      // 見出しは見出しのナンバリングをそのまま使用
+      link(
+        it.element.location(),
+        numbering(
+          heading.numbering,
+          ..counter(heading).at(it.element.location()),
+        ).trim(),
+      )
+    } else {
+      it
+    }
   }
 
-  // 让数学公式的显示以 (1.1) 来表现
-  set math.equation(
-    numbering: n => {
-      numbering("(1.1)", counter(heading).get().first(), n)
+  // 見出しのナンバリングとフォントを設定
+  // show heading: set text(font: fonts.sans-serif)
+
+  // 章の見出し
+  show heading.where(level: 1): it => {
+    // 図表番号をリセット
+    counter(figure.where(kind: image)).update(0)
+    counter(figure.where(kind: table)).update(0)
+    // 脚注番号をリセット
+    counter(footnote).update(0)
+
+    // 右寄せにする
+    set align(right)
+    set text(size: 20pt)
+
+    v(3%)
+    // 章番号を表示
+    if counter(heading).at(it.location()).at(0) != 0 {
+      text(
+        fill: luma(100),
+        numbering(
+          heading.numbering,
+          ..counter(heading).at(it.location()),
+        ).trim(),
+      )
+    } else {
+      // ナンバリングがない場合はダミーを入れる
+      text("")
+    }
+    v(-12pt)
+    it.body
+    v(10%)
+  }
+  set heading(
+    numbering: (..args) => {
+      let nums = args.pos()
+      if nums.len() == 1 {
+        numbering("第1章  ", ..nums)
+      } else {
+        numbering("1.1.1 ", ..nums)
+      }
     },
   )
 
@@ -199,7 +298,6 @@
   show heading.where(level: 1): set text(size: font_size, weight: 600)
   show heading.where(level: 1): it => {
     if is-thesis {
-      // New page if configured
       pagebreak(weak: true)
       v(THESIS_HEADING_EXTRA_TOP_MARGIN)
       it
@@ -219,11 +317,17 @@
     bottom_margin = 25pt
   }
 
-  show heading.where(level: 2): set block(
-    above: top_margin,
-    below: bottom_margin,
-  )
-  show heading.where(level: 2): set text(size: font_size)
+  // 節の見出し
+  show heading.where(level: 2): it => {
+    set text(size: 11pt)
+    set par(leading: 0.4em)
+    set block(
+      above: top_margin,
+      below: bottom_margin,
+    )
+
+    align(center)[#it]
+  }
 
   // Configure h3
   if is-thesis {
@@ -272,7 +376,7 @@
       )
     }
     abstract_page(
-      language: "de",
+      language: "zh",
       author: author,
       title: title-zh,
       keywords: keywords-zh,
@@ -300,7 +404,7 @@
   }
 
   // Reset page numbering and set it to numbers
-  set page(numbering: "1")
+  set page(numbering: "1 / 1")
   counter(page).update(1)
 
   // Main body.
@@ -309,6 +413,7 @@
   body
 
   // Declaration of independent processing
+  counter(heading).update(0)
   if include-declaration-of-independent-processing {
     pagebreak(weak: true)
     import "pages/declaration_of_independent_processing.typ": (
