@@ -21,7 +21,7 @@
   body,
 ) = {
   let THESIS_HEADING_EXTRA_TOP_MARGIN = 70pt
-  let PAGE_MARGIN_TOP = 37mm
+  let PAGE_MARGIN_TOP = 18mm
 
   let title = title-zh
   if language == "en" {
@@ -39,9 +39,9 @@
       left: 15mm,
       right: 15mm,
       top: PAGE_MARGIN_TOP,
-      bottom: 20mm,
+      bottom: 15mm,
     ),
-    numbering: "1",
+    // numbering: "1",
     number-align: right,
     binding: left,
     header-ascent: 24pt,
@@ -86,7 +86,7 @@
         }
       }
 
-      set text(size: 11.5pt)
+      set text(size: 11pt)
       grid(
         rows: 2,
         gutter: 5pt,
@@ -124,7 +124,7 @@
   show figure.where(kind: table): set figure.caption(position: top)
   show table: it => {
     // 表内の文字は少し小さくする
-    set text(size: 8pt)
+    set text(size: 10pt)
     // justifyだとあまりきれいじゃないので無効化
     set par(justify: false)
     it
@@ -136,14 +136,21 @@
     it
   }
 
-  // set math.equation(numbering: numbering.with("(1.1)"), supplement: "式")
-  // 让数学公式的显示以 (1.1) 来表现
-  // set math.equation(
-  //   numbering: n => {
-  //     numbering("(1.1)", counter(heading).get().first(), n)
-  //   },
-  //   supplement: "式",
-  // )
+  let accent-color = eastern
+  let ghost-color = rgb(50%, 50%, 50%, 50%)
+  set list(
+    marker: (
+      text(
+        font: "Menlo",
+        size: 1.5em,
+        baseline: -0.2em,
+        "✴",
+        fill: accent-color,
+      ),
+      text(size: 0.6em, baseline: +0.2em, "➤", fill: ghost-color),
+    ),
+  )
+
   set math.equation(
     numbering: (..num) => context {
       let current-chapter-num = counter(heading).get().at(0)
@@ -160,11 +167,10 @@
   set figure.caption(separator: h(1em))
 
   set par(leading: 9pt, first-line-indent: (amount: 2em, all: true))
-  // set text(font: "New Computer Modern", lang: language, size: 10.85pt)
   set text(
     font: ("Liberation Sans", "New Computer Modern", "SimSun"),
     lang: language,
-    size: 10.85pt,
+    size: 11pt,
   ) // region: "cn",
   set heading(numbering: "1.1")
 
@@ -223,7 +229,7 @@
     }
     v(-12pt)
     it.body
-    v(10%)
+    v(7%)
   }
   set heading(
     numbering: (..args) => {
@@ -246,7 +252,7 @@
   set footnote(numbering: sym.dagger + "1")
   set footnote.entry(separator: line(length: 100%, stroke: 0.5pt))
   show footnote: it => {
-    set text(size: 11pt)
+    set text(size: 10.5pt)
     it
   }
   show footnote.entry: it => {
@@ -317,7 +323,7 @@
     above: top_margin,
     below: bottom_margin,
   )
-  show heading.where(level: 1): set text(size: font_size, weight: 600)
+  // show heading.where(level: 1): set text(size: font_size, weight: 600)
   show heading.where(level: 1): it => {
     if is-thesis {
       pagebreak(weak: true)
@@ -366,7 +372,7 @@
     above: top_margin,
     below: bottom_margin,
   )
-  show heading.where(level: 3): set text(size: font_size)
+  show heading.where(level: 3): set text(size: 11pt)
 
   // Cover
   import "pages/cover.typ": cover_page
