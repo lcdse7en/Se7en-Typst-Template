@@ -166,7 +166,12 @@
   )
   set figure.caption(separator: h(1em))
 
-  set par(leading: 9pt, first-line-indent: (amount: 2em, all: true))
+  set par(
+    leading: 0.6em,
+    justify: true,
+    spacing: 1.5em,
+    first-line-indent: (amount: 2em, all: true),
+  )
   set text(
     font: ("Liberation Sans", "New Computer Modern", "SimSun"),
     lang: language,
