@@ -179,7 +179,7 @@
   }
   show figure.where(kind: image): set figure(supplement: "图")
   show figure.caption: it => {
-    set text(size: 10pt)
+    set text(size: 10.5pt)
     set align(center)
     it
   }
