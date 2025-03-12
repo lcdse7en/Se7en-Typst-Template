@@ -1,4 +1,6 @@
 #let report(
+  paper-size: "a4",
+  font-size: 11pt,
   language: "en",
   title: "",
   subtitle: "",
@@ -20,6 +22,8 @@
 ) = {
   import "template.typ": template
   template(
+    paper-size: paper-size,
+    font-size: font-size,
     is-thesis: false,
     is-master-thesis: false,
     is-bachelor-thesis: false,

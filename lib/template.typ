@@ -1,4 +1,6 @@
 #let template(
+  paper-size: "a4",
+  font-size: 11pt,
   is-thesis: true,
   is-master-thesis: false,
   is-bachelor-thesis: true,
@@ -70,71 +72,8 @@
   // Set the document's basic properties.
   set document(author: author, title: title, date: submission-date)
   set page(
-    paper: "a4",
-    // margin: (
-    //   left: 15mm,
-    //   right: 15mm,
-    //   top: PAGE_MARGIN_TOP,
-    //   bottom: 15mm,
-    // ),
+    paper: paper-size,
     margin: (x: 1.8cm, bottom: 1.8cm, top: 1.8cm),
-    // numbering: "1",
-    // number-align: right,
-    // binding: left,
-    // header-ascent: 24pt,
-    // header: context {
-    //   // Before
-    //   let selector_before = selector(heading.where(level: 1)).before(here())
-    //   let level_before = int(counter(selector_before).display())
-    //   let headings_before = query(selector_before)
-    //
-    //   if headings_before.len() == 0 {
-    //     return
-    //   }
-    //
-    //   // After
-    //   let selector_after = selector(heading.where(level: 1)).after(here())
-    //   let level_after = level_before + 1
-    //   let headings_after = query(selector_after)
-    //
-    //   if headings_after.len() == 0 {
-    //     return
-    //   }
-    //
-    //   // Get headings
-    //   let heading_before = headings_before.last()
-    //   let heading_after = headings_after.first()
-    //
-    //   // Decide on heading
-    //   let heading = heading_before
-    //   let level = level_before
-    //
-    //   if heading_after.location().page() == here().page() {
-    //     if (
-    //       heading_after.location().position().y
-    //         == (THESIS_HEADING_EXTRA_TOP_MARGIN + PAGE_MARGIN_TOP)
-    //         or heading_after.location().position().y == PAGE_MARGIN_TOP
-    //     ) {
-    //       // Next header is first element of page
-    //       return
-    //     } else {
-    //       heading = heading_after
-    //       level = level_after
-    //     }
-    //   }
-    //
-    //   set text(size: 11pt)
-    //   grid(
-    //     rows: 2,
-    //     gutter: 5pt,
-    //     if heading.numbering != none {
-    //       emph(str(level) + " " + heading.body)
-    //     } else {
-    //       emph(heading.body)
-    //     },
-    //     line(length: 100%, stroke: 0.7pt),
-    //   )
-    // },
     header: context {
       set text(size: 11pt)
       let page_number = counter(page).at(here()).first()
@@ -278,7 +217,7 @@
   set text(
     font: ("Segoe UI", "Microsoft YaHei"),
     lang: language,
-    size: 11pt,
+    size: font-size,
     weight: 500,
   ) // region: "cn",
 
@@ -332,32 +271,6 @@
   // 見出しのナンバリングとフォントを設定
   show heading: set text(weight: "bold")
 
-  // 章の見出し
-  // show heading.where(level: 1): it => {
-  //   counter(figure.where(kind: image)).update(0)
-  //   counter(figure.where(kind: table)).update(0)
-  //   counter(footnote).update(0)
-  //
-  //   set align(right)
-  //   set text(size: 20pt, weight: "bold")
-  //
-  //   v(3%)
-  //   if counter(heading).at(it.location()).at(0) != 0 {
-  //     text(
-  //       fill: luma(100),
-  //       numbering(
-  //         heading.numbering,
-  //         ..counter(heading).at(it.location()),
-  //       ).trim(),
-  //     )
-  //   } else {
-  //     text("")
-  //   }
-  //   v(-12pt)
-  //   it.body
-  //   v(7%)
-  // }
-
   let title1 = 1.8em
   let title2 = 1.5em
   let title3 = 1.3em
@@ -370,6 +283,7 @@
   show heading.where(level: 1): set heading(supplement: supplement-chapter)
 
   show heading: it => {
+    set text(size: font-size)
     if it.level == 1 {
       pagebreak(to: "odd")
       counter(figure.where(kind: image)).update(0)
@@ -404,7 +318,7 @@
                         right: 0pt,
                         left: 10pt,
                       ),
-                      align(left, text(size: title1, baseline: -4pt, it)),
+                      align(left, text(size: title1, it)),
                     ),
                   ),
                 ),
@@ -660,14 +574,14 @@
   }
 
   // List of Figures
-  if is-thesis {
-    include "pages/list_of_figures.typ"
-  }
+  // if is-thesis {
+  //   include "pages/list_of_figures.typ"
+  // }
 
   // List of Tables
-  if is-thesis {
-    include "pages/list_of_tables.typ"
-  }
+  // if is-thesis {
+  //   include "pages/list_of_tables.typ"
+  // }
 
   // Listings
   if is-thesis {
@@ -695,13 +609,13 @@
   my-outline-sec(
     list-of-figure-title,
     figure.where(kind: image),
-    1.1em,
+    outline-heading3,
   )
 
   my-outline-sec(
     list-of-table-title,
     figure.where(kind: table),
-    1.1em,
+    outline-heading3,
   )
 
   // Main body.
