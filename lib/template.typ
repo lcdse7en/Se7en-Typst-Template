@@ -380,43 +380,6 @@
         if img != none {
           set image(width: 21cm, height: 9.4cm)
           place(move(dx: -1.8cm, dy: -1.8cm, img))
-          // place(
-          //   move(
-          //     dx: -2cm,
-          //     dy: -2cm,
-          //     block(
-          //       width: 22.5cm,
-          //       height: 9.4cm,
-          //       align(
-          //         center,
-          //         pad(
-          //           top: 3.5cm,
-          //           block(
-          //             width: 29pt,
-          //             height: 4.8em,
-          //             stroke: (
-          //               right: none,
-          //               rest: 0pt + main-color,
-          //             ),
-          //             inset: (left: 0.85em, rest: 0.85em),
-          //             fill: luma(0),
-          //             radius: (
-          //               right: 0pt,
-          //               left: 0pt,
-          //             ),
-          //             text(
-          //               fill: luma(100),
-          //               numbering(
-          //                 heading.numbering,
-          //                 ..counter(heading).at(it.location()),
-          //               ).trim(),
-          //             ),
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // )
           place(
             move(
               dx: -1.8cm,
@@ -429,61 +392,60 @@
                   pad(
                     bottom: 1.2cm,
                     block(
-                      width: 51%,
+                      width: 86%,
                       // height: 2.2cm,
                       stroke: (
                         right: none,
                         rest: 2pt + main-color,
                       ),
-                      inset: (left: 2em, rest: 0.8em),
+                      inset: (left: 2em, rest: 1.6em),
                       fill: rgb("#FFFFFFAA"),
                       radius: (
                         right: 0pt,
                         left: 10pt,
                       ),
-                      // align(left, text(size: 20pt, it.body)),
-                      align(left, text(size: 20pt, it)),
+                      align(left, text(size: title1, baseline: -4pt, it)),
                     ),
                   ),
                 ),
               ),
             ),
           )
-          place(
-            move(
-              dx: -1.8cm,
-              dy: -1.8cm,
-              block(
-                width: 21cm,
-                height: 9.6cm,
-                align(
-                  left + top,
-                  pad(
-                    top: 0.5cm,
-                    left: 0.5cm,
-                    block(
-                      width: 42%,
-                      height: 8cm,
-                      stroke: (
-                        right: none,
-                        rest: 0pt + main-color,
-                      ),
-                      inset: (left: 0.6em, rest: .6em),
-                      fill: rgb("#FFFFFFAA"),
-                      radius: (
-                        right: 0pt,
-                        left: 0pt,
-                      ),
-                      align(
-                        left,
-                        text(size: 10.5pt, heading-text.at(here())),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          )
+          // place(
+          //   move(
+          //     dx: -1.8cm,
+          //     dy: -1.8cm,
+          //     block(
+          //       width: 21cm,
+          //       height: 9.6cm,
+          //       align(
+          //         left + top,
+          //         pad(
+          //           top: 0.5cm,
+          //           left: 0.5cm,
+          //           block(
+          //             width: 42%,
+          //             height: 8cm,
+          //             stroke: (
+          //               right: none,
+          //               rest: 0pt + main-color,
+          //             ),
+          //             inset: (left: 0.6em, rest: .6em),
+          //             fill: rgb("#FFFFFFAA"),
+          //             radius: (
+          //               right: 0pt,
+          //               left: 0pt,
+          //             ),
+          //             align(
+          //               left,
+          //               text(size: 10.5pt, heading-text.at(here())),
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // )
           v(8.4cm)
         } else {
           move(
