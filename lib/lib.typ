@@ -1,7 +1,17 @@
 #let report(
   language: "en",
   title: "",
-  author: "",
+  subtitle: "",
+  author: (),
+  logo: none,
+  cover: none,
+  image-index: none,
+  main-color: blue,
+  copyright: [],
+  list-of-figure-title: none,
+  list-of-table-title: none,
+  part-style: 0,
+  supplement-chapter: "Chapter",
   faculty: "",
   department: "",
   date: "",
@@ -18,6 +28,8 @@
     language: language,
 
     title-zh: title,
+
+    subtitle: subtitle,
     keywords-zh: none,
     abstract-zh: none,
 
@@ -26,6 +38,17 @@
     abstract-en: none,
 
     author: author,
+
+    cover: cover,
+    logo: logo,
+    image-index: image-index,
+    copyright: copyright,
+    list-of-figure-title: list-of-figure-title,
+    list-of-table-title: list-of-table-title,
+    main-color: main-color,
+    part-style: part-style,
+    supplement-chapter: supplement-chapter,
+
     faculty: faculty,
     department: department,
     study-course: none,
