@@ -613,6 +613,8 @@
     )
   }
 
+  set underline(offset: 3pt)
+
   // Title page.
   page(margin: 0cm, header: none)[
     #set text(fill: black)
