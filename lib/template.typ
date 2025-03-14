@@ -191,9 +191,10 @@
       text(
         font: "Menlo",
         size: 1.5em,
-        baseline: -0.2em,
-        "✴",
-        fill: accent-color,
+        baseline: -0.1em,
+        // "✴",
+        "•",
+        fill: luma(0),
       ),
       text(size: 0.6em, baseline: +0.2em, "➤", fill: ghost-color),
     ),
@@ -215,7 +216,7 @@
   set figure.caption(separator: h(1em))
 
   set text(
-    font: ("Segoe UI", "Microsoft YaHei"),
+    font: ("Segoe UI", "Microsoft YaHei", "SeoulNamsan", "SeoulHangang"),
     lang: language,
     size: font-size,
     weight: 500,
