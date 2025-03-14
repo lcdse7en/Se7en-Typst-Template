@@ -216,7 +216,16 @@
   set figure.caption(separator: h(1em))
 
   set text(
-    font: ("Segoe UI", "Microsoft YaHei", "SeoulNamsan", "SeoulHangang"),
+    font: (
+      // Englisgh
+      // "Menlo",
+      "Segoe UI",
+      // Chinese
+      "Microsoft YaHei",
+      // Korea
+      "SeoulNamsan M",
+      "SeoulHangang M",
+    ),
     lang: language,
     size: font-size,
     weight: 500,
@@ -270,7 +279,7 @@
   )
 
   // 見出しのナンバリングとフォントを設定
-  show heading: set text(weight: "bold")
+  show heading: set text(font: ("Menlo", "Microsoft YaHei"), weight: "bold")
 
   let title1 = 1.8em
   let title2 = 1.5em
