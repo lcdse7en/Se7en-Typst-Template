@@ -73,7 +73,7 @@
   set document(author: author, title: title, date: submission-date)
   set page(
     paper: paper-size,
-    margin: (x: 1.8cm, bottom: 1.8cm, top: 1.8cm),
+    margin: (x: 2.2cm, bottom: 1.5cm, top: 1.8cm),
     header: context {
       set text(size: 11pt)
       let page_number = counter(page).at(here()).first()
@@ -471,8 +471,10 @@
       pagebreak(weak: true)
       v(THESIS_HEADING_EXTRA_TOP_MARGIN)
       it
+      par(leading: 1.5em)[#text(size: 0.0em)[#h(0.0em)]]
     } else {
       it
+      par(leading: 1.5em)[#text(size: 0.0em)[#h(0.0em)]]
     }
   }
 
@@ -497,6 +499,7 @@
     )
 
     align(left)[#it]
+    par(leading: 1.5em)[#text(size: 0.0em)[#h(0.0em)]]
   }
 
   // Configure h3
@@ -514,7 +517,7 @@
     above: top_margin,
     below: bottom_margin,
   )
-  show heading.where(level: 3): set text(size: 11pt)
+  show heading.where(level: 3): set text(size: 10.5pt)
 
   // Abstract
   if abstract-zh != none or abstract-en != none {
