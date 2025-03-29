@@ -160,7 +160,21 @@
   show heading: it => it + fakepar // 标题后缩进
   show figure: it => it + fakepar // 图表后缩进
   show enum.item: it => it + fakepar
+  show enum.item: set block(
+    above: 0.95em,
+    below: 0.95em,
+  )
   show list.item: it => it + fakepar // 列表后缩进
+  show list.item: set block(
+    above: 0.95em,
+    below: 0.95em,
+  )
+
+  show grid: set block(
+    above: 0.95em,
+    below: 0.95em,
+  )
+
   show math.equation: set text(
     font: (
       "New Computer Modern Math",
@@ -187,16 +201,18 @@
   let accent-color = eastern
   let ghost-color = rgb(50%, 50%, 50%, 50%)
   set list(
+    spacing: 0.65em,
+    indent: 0em,
     marker: (
+      // text(size: 0.6em, baseline: +0.2em, "➤", fill: ghost-color),
+      text(size: 0.6em, baseline: +0.2em, "➤", fill: luma(0)),
       text(
         font: "Menlo",
-        size: 1.5em,
+        size: 1.2em,
         baseline: -0.1em,
-        // "✴",
         "•",
         fill: luma(0),
       ),
-      text(size: 0.6em, baseline: +0.2em, "➤", fill: ghost-color),
     ),
   )
 
@@ -471,10 +487,10 @@
       pagebreak(weak: true)
       v(THESIS_HEADING_EXTRA_TOP_MARGIN)
       it
-      par(leading: 1.5em)[#text(size: 0.0em)[#h(0.0em)]]
+      par(leading: 122em)[#text(size: 0.0em)[#h(0.0em)]]
     } else {
       it
-      par(leading: 1.5em)[#text(size: 0.0em)[#h(0.0em)]]
+      par(leading: 1.2em)[#text(size: 0.0em)[#h(0.0em)]]
     }
   }
 
@@ -495,11 +511,11 @@
     set par(leading: 0.4em)
     set block(
       above: top_margin,
-      below: bottom_margin,
+      below: 0pt,
     )
 
     align(left)[#it]
-    par(leading: 1.5em)[#text(size: 0.0em)[#h(0.0em)]]
+    par(leading: 1.2em)[#text(size: 0.0em)[#h(0.0em)]]
   }
 
   // Configure h3
