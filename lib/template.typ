@@ -45,8 +45,8 @@
   let title-main-3 = 2.2em
   let title1 = 2.2em
   let title2 = 1.5em
-  let title3 = 1.3em
-  let title4 = 1.2em
+  let title3 = 1.1em
+  let title4 = 1.1em
   let title5 = 11pt
 
   let outline-part = 1.5em
@@ -319,10 +319,10 @@
         let img = heading-image.at(here())
         if img != none {
           set image(width: 21cm, height: 9.4cm)
-          place(move(dx: -1.8cm, dy: -1.8cm, img))
+          place(move(dx: -2.2cm, dy: -1.8cm, img))
           place(
             move(
-              dx: -1.8cm,
+              dx: -2.2cm,
               dy: -1.8cm,
               block(
                 width: 21cm,
@@ -422,7 +422,7 @@
         space = 1em
       } else if it.level == 3 {
         size = title3
-        space = 0.9em
+        space = 0.7em
       } else {
         size = title4
         space = 0.7em
