@@ -247,6 +247,18 @@
     weight: 500,
   ) // region: "cn",
 
+  show raw.where(block: false): {
+    box.with(
+      fill: rgb("202628"),
+      inset: (x: 3pt),
+      outset: (y: 4pt),
+      radius: 2pt,
+    )
+  }
+
+  // Blocs de code inline
+  show raw.where(block: false): set text(fill: white)
+
   show ref: it => {
     if it.element == none {
       it
@@ -649,10 +661,12 @@
 
   // Main body.
   set par(
-    leading: 0.6em,
+    // leading: 0.6em,
     justify: true,
-    spacing: 1.5em,
-    first-line-indent: (amount: 2em, all: false),
+    // spacing: 1.5em,
+    spacing: 0.65em,
+    // first-line-indent: (amount: 2em, all: false),
+    first-line-indent: 2em,
   )
 
   // 超链接设置颜色和下划线
