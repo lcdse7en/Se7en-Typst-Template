@@ -67,11 +67,11 @@
   ),
   list-of-figures: value(
     en: "List of Figures",
-    zh: "Abbildungsverzeichnis",
+    zh: "图片列表",
   ),
   list-of-tables: value(
     en: "List of Tables",
-    zh: "Tabellenverzeichnis",
+    zh: "表格列表",
   ),
   listings: value(
     en: "Listings",

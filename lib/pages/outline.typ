@@ -53,32 +53,25 @@
       let part-counter = part-counter.at(it.element.location())
       if (part-change) {
         v(0.7cm, weak: true)
-        box(
-          width: 1.1cm,
-          fill: main-color.lighten(80%),
-          inset: 5pt,
-          align(
-            center,
-            text(
-              size: textSize1,
-              weight: "bold",
-              fill: main-color.lighten(30%),
-              numbering("I", part-counter.first()),
-            ),
+        box(width: 1.1cm, fill: main-color.lighten(80%), inset: 5pt, align(
+          center,
+          text(
+            size: textSize1,
+            weight: "bold",
+            fill: main-color.lighten(30%),
+            numbering("I", part-counter.first()),
           ),
-        )
+        ))
         h(0.1cm)
         box(
           width: 100% - 1.2cm,
           fill: main-color.lighten(60%),
           inset: 5pt,
-          align(
-            center,
-            link(
-              part-location,
-              text(size: textSize1, weight: "bold", part-state),
-            ),
-          ),
+          align(center, link(part-location, text(
+            size: textSize1,
+            weight: "bold",
+            part-state,
+          ))),
         )
         v(0.45cm, weak: true)
       } else {
@@ -202,10 +195,9 @@
     [
       #set text(size: textSize)
       #box(width: 100%)[
-        #box(
-          width: 0.75cm,
-          align(right, [#it.prefix().at("children").at(2) #h(0.2cm)]),
-        )
+        #box(width: 0.75cm, align(right, [#it.prefix().at("children").at(2) #h(
+            0.2cm,
+          )]))
         #link(it.element.location(), it.element.at("caption").body)
         #box(width: 1fr, repeat(text(weight: "regular")[. #h(4pt)]))
         #link(it.element.location(), heading_page)

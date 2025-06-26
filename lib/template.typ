@@ -120,20 +120,17 @@
           box(width: 100%, inset: (bottom: 5pt), stroke: (bottom: 0.5pt))[
             #page_number
             #h(1fr)
-            #text(
-              weight: "bold",
-              if appendix != none {
-                numbering("A.1", counterInt) + ". " + before.last().body
-              } else {
-                (
-                  before.last().supplement
-                    + " "
-                    + str(counterInt)
-                    + ". "
-                    + before.last().body
-                )
-              },
-            )
+            #text(weight: "bold", if appendix != none {
+              numbering("A.1", counterInt) + ". " + before.last().body
+            } else {
+              (
+                before.last().supplement
+                  + " "
+                  + str(counterInt)
+                  + ". "
+                  + before.last().body
+              )
+            })
           ]
         }
       }
@@ -160,28 +157,17 @@
   show heading: it => it + fakepar // 标题后缩进
   show figure: it => it + fakepar // 图表后缩进
   show enum.item: it => it + fakepar
-  show enum.item: set block(
-    above: 0.95em,
-    below: 0.95em,
-  )
+  show enum.item: set block(above: 0.95em, below: 0.95em)
   show list.item: it => it + fakepar // 列表后缩进
-  show list.item: set block(
-    above: 0.95em,
-    below: 0.95em,
-  )
+  show list.item: set block(above: 0.95em, below: 0.95em)
 
-  show grid: set block(
-    above: 0.95em,
-    below: 0.95em,
-  )
+  show grid: set block(above: 0.95em, below: 0.95em)
 
-  show math.equation: set text(
-    font: (
-      "New Computer Modern Math",
-      "DejaVu Sans",
-      "Yu Gothic",
-    ),
-  )
+  show math.equation: set text(font: (
+    "New Computer Modern Math",
+    "DejaVu Sans",
+    "Yu Gothic",
+  ))
   show figure.where(kind: table): set figure(supplement: "表")
   show figure.where(kind: table): set figure.caption(position: top)
   show table: it => {
@@ -200,35 +186,21 @@
 
   let accent-color = eastern
   let ghost-color = rgb(50%, 50%, 50%, 50%)
-  set list(
-    spacing: 0.65em,
-    indent: 0em,
-    marker: (
-      // text(size: 0.6em, baseline: +0.2em, "➤", fill: ghost-color),
-      text(size: 0.6em, baseline: +0.2em, "➤", fill: luma(0)),
-      text(
-        font: "Menlo",
-        size: 1.2em,
-        baseline: -0.1em,
-        "•",
-        fill: luma(0),
-      ),
-    ),
-  )
+  set list(spacing: 0.65em, indent: 0em, marker: (
+    // text(size: 0.6em, baseline: +0.2em, "➤", fill: ghost-color),
+    text(size: 0.6em, baseline: +0.2em, "➤", fill: luma(0)),
+    text(font: "Menlo", size: 1.2em, baseline: -0.1em, "•", fill: luma(0)),
+  ))
 
-  set math.equation(
-    numbering: (..num) => context {
-      let current-chapter-num = counter(heading).get().at(0)
-      numbering("(1.1)", current-chapter-num, ..num)
-    },
-  )
+  set math.equation(numbering: (..num) => context {
+    let current-chapter-num = counter(heading).get().at(0)
+    numbering("(1.1)", current-chapter-num, ..num)
+  })
 
-  set figure(
-    numbering: (..num) => {
-      let current-chapter-num = counter(heading).get().at(0)
-      numbering("1-1", current-chapter-num, ..num)
-    },
-  )
+  set figure(numbering: (..num) => {
+    let current-chapter-num = counter(heading).get().at(0)
+    numbering("1-1", current-chapter-num, ..num)
+  })
   set figure.caption(separator: h(1em))
 
   set text(
@@ -271,43 +243,39 @@
       it
     } else if it.element.func() == heading and it.element.level == 1 {
       // 見出しは見出しのナンバリングをそのまま使用
-      link(
-        it.element.location(),
-        numbering(
-          heading.numbering,
-          ..counter(heading).at(it.element.location()),
-        ).trim(),
-      )
+      link(it.element.location(), numbering(heading.numbering, ..counter(
+        heading,
+      ).at(it.element.location())).trim())
     } else {
       it
     }
   }
 
-  set heading(
-    hanging-indent: 0pt,
-    numbering: (..nums) => {
-      let vals = nums.pos()
-      let pattern = if vals.len() == 1 { "1." } else if vals.len() <= 4 {
-        "1.1"
-      }
-      if pattern != none { numbering(pattern, ..nums) }
-    },
-  )
+  set heading(hanging-indent: 0pt, numbering: (..nums) => {
+    let vals = nums.pos()
+    let pattern = if vals.len() == 1 { "1." } else if vals.len() <= 4 {
+      "1.1"
+    }
+    if pattern != none { numbering(pattern, ..nums) }
+  })
 
   // show heading.where(level: 1): set heading(supplement: "Chapter")
-  set heading(
-    numbering: (..args) => {
-      let nums = args.pos()
-      if nums.len() == 1 {
-        numbering("第1章  ", ..nums)
-      } else {
-        numbering("1.1.1 ", ..nums)
-      }
-    },
-  )
+  set heading(numbering: (..args) => {
+    let nums = args.pos()
+    if nums.len() == 1 {
+      set text(baseline: 7pt)
+      numbering("第1章  ", ..nums)
+    } else {
+      numbering("1.1.1 ", ..nums)
+    }
+  })
 
   // 見出しのナンバリングとフォントを設定
-  show heading: set text(font: ("Menlo", "Microsoft YaHei"), weight: "bold")
+  show heading: set text(
+    font: ("Menlo", "Microsoft YaHei"),
+    baseline: 7pt,
+    weight: "bold",
+  )
 
   let title1 = 1.8em
   let title2 = 1.5em
@@ -330,97 +298,78 @@
       context {
         let img = heading-image.at(here())
         if img != none {
-          set image(width: 21cm, height: 9.4cm)
-          place(move(dx: -2.2cm, dy: -1.8cm, img))
-          place(
-            move(
-              dx: -2.2cm,
-              dy: -1.8cm,
-              block(
-                width: 21cm,
-                height: 9.4cm,
-                align(
-                  right + bottom,
-                  pad(
-                    bottom: 1.2cm,
-                    block(
-                      width: 86%,
-                      // height: 2.2cm,
-                      stroke: (
-                        right: none,
-                        rest: 2pt + main-color,
-                      ),
-                      inset: (left: 2em, rest: 1.6em),
-                      fill: rgb("#FFFFFFAA"),
-                      radius: (
-                        right: 0pt,
-                        left: 10pt,
-                      ),
-                      align(left, text(size: title1, it)),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          )
-          // place(
-          //   move(
-          //     dx: -1.8cm,
-          //     dy: -1.8cm,
-          //     block(
-          //       width: 21cm,
-          //       height: 9.6cm,
-          //       align(
-          //         left + top,
-          //         pad(
-          //           top: 0.5cm,
-          //           left: 0.5cm,
-          //           block(
-          //             width: 42%,
-          //             height: 8cm,
-          //             stroke: (
-          //               right: none,
-          //               rest: 0pt + main-color,
-          //             ),
-          //             inset: (left: 0.6em, rest: .6em),
-          //             fill: rgb("#FFFFFFAA"),
-          //             radius: (
-          //               right: 0pt,
-          //               left: 0pt,
-          //             ),
-          //             align(
-          //               left,
-          //               text(size: 10.5pt, heading-text.at(here())),
-          //             ),
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // )
+          let img-h = 9cm
+          place(top, dy: -page.margin.top, dx: -page.margin.left, block(
+            width: page.width,
+            {
+              image-index
+              // image(
+              //   "./orange1.jpg",
+              //   width: 100%,
+              //   height: img-h,
+              //   fit: "cover",
+              // )
+              place(bottom, {
+                block(
+                  fill: luma(81.57%, 91.4%).transparentize(10%),
+                  stroke: 0pt,
+                  height: 1.5cm,
+                  // inset: (left: 2em, rest: 1.6em),
+                  inset: (left: page.margin.left),
+                  width: 100%,
+                  align(left + horizon, text(
+                    size: title1,
+                    font: "Microsoft YaHei",
+                    it,
+                  )),
+                )
+              })
+            },
+          ))
+
+          // set image(width: 21cm, height: 9.4cm)
+          // place(move(dx: -2.2cm, dy: -1.8cm, img))
+          //
+          // let img-h = 9cm
+          // place(move(dx: -2.2cm, dy: -1.8cm, block(
+          //   // width: 21cm,
+          //   width: page.width,
+          //   height: 9cm,
+          //   align(right + bottom, pad(bottom: 1.2cm, block(
+          //     // width: 86%,
+          //     width: 100%,
+          //     height: 1.5cm,
+          //     // stroke: (
+          //     //   right: none,
+          //     //   rest: 2pt + main-color,
+          //     // ),
+          //     stroke: 0pt,
+          //     inset: (left: 2em, rest: 1.6em),
+          //     // fill: rgb("#FFFFFFAA"),
+          //     fill: luma(81.57%, 91.4%).transparentize(10%),
+          //     // radius: (
+          //     //   right: 0pt,
+          //     //   left: 10pt,
+          //     // ),
+          //     align(left + horizon, text(size: title1, it)),
+          //   ))),
+          // )))
           v(8.4cm)
         } else {
-          move(
-            dx: 1.8cm,
-            dy: -0.5cm,
-            align(
-              right + top,
-              block(
-                width: 100% + 3cm,
-                stroke: (
-                  right: none,
-                  rest: 2pt + main-color,
-                ),
-                inset: (left: 2em, rest: 1.6em),
-                fill: white,
-                radius: (
-                  right: 0pt,
-                  left: 10pt,
-                ),
-                align(left, text(size: title1, it)),
-              ),
+          move(dx: 1.8cm, dy: -0.5cm, align(right + top, block(
+            width: 100% + 3cm,
+            stroke: (
+              right: none,
+              rest: 2pt + main-color,
             ),
-          )
+            inset: (left: 2em, rest: 1.6em),
+            fill: white,
+            radius: (
+              right: 0pt,
+              left: 10pt,
+            ),
+            align(left, text(size: title1, it)),
+          )))
           v(1.5cm, weak: true)
         }
       }
@@ -521,10 +470,7 @@
   show heading.where(level: 2): it => {
     set text(size: 11pt)
     set par(leading: 0.4em)
-    set block(
-      above: top_margin,
-      below: 0pt,
-    )
+    set block(above: top_margin, below: 0pt)
 
     align(left)[#it]
     par(leading: 1.2em)[#text(size: 0.0em)[#h(0.0em)]]
@@ -586,23 +532,20 @@
       set image(width: 3cm)
       place(top + center, pad(top: 1cm, logo))
     }
-    #align(
-      center + horizon,
-      block(
-        width: 100%,
-        fill: main-color.lighten(70%),
-        height: 7.5cm,
-        pad(x: 2cm, y: 1cm)[
-          #par(leading: 0.4em)[
-            #text(size: title-main-1, weight: "black", title)
-          ]
-          #v(1cm, weak: true)
-          #text(size: title-main-2, subtitle)
-          #v(1cm, weak: true)
-          #text(size: title-main-3, weight: "bold", author)
-        ],
-      ),
-    )
+    #align(center + horizon, block(
+      width: 100%,
+      fill: main-color.lighten(70%),
+      height: 7.5cm,
+      pad(x: 2cm, y: 1cm)[
+        #par(leading: 0.4em)[
+          #text(size: title-main-1, weight: "black", title)
+        ]
+        #v(1cm, weak: true)
+        #text(size: title-main-2, subtitle)
+        #v(1cm, weak: true)
+        #text(size: title-main-3, weight: "bold", author)
+      ],
+    ))
   ]
   if (copyright != none) {
     set text(size: 10pt)
@@ -648,13 +591,13 @@
   )
 
   my-outline-sec(
-    list-of-figure-title,
+    text(baseline: 1pt, font: "Microsoft YaHei")[#list-of-figure-title],
     figure.where(kind: image),
     outline-heading3,
   )
 
   my-outline-sec(
-    list-of-table-title,
+    text(baseline: 1pt, font: "Microsoft YaHei")[#list-of-table-title],
     figure.where(kind: table),
     outline-heading3,
   )
@@ -681,10 +624,10 @@
 
   // Declaration of independent processing
   counter(heading).update(0)
-  show heading.where(level: 1): it => {
-    set align(center)
-    it.body
-  }
+  // show heading.where(level: 1): it => {
+  // set align(bottom + center)
+  // it.body
+  // }
   if include-declaration-of-independent-processing {
     pagebreak(weak: true)
     import "pages/declaration_of_independent_processing.typ": (
