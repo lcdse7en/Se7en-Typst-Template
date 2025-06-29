@@ -127,7 +127,7 @@
       )
     }
   }
-  outline(depth: 3, indent: 0em)
+  outline(depth: 3, indent: 0em, title: [#text(baseline: 2pt, "目录")])
 }
 
 #let my-outline-small(
