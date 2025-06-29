@@ -183,6 +183,7 @@
     set align(center)
     it
   }
+  show figure: set block(breakable: true)
 
   let accent-color = eastern
   let ghost-color = rgb(50%, 50%, 50%, 50%)
