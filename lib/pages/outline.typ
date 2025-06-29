@@ -97,7 +97,7 @@
       my-outline-row(
         insetSize: 2pt,
         textWeight: "bold",
-        textSize: textSize2,
+        textSize: textSize3,
         textColor: main-color,
         number: number,
         title: title,
@@ -118,7 +118,7 @@
     } else {
       my-outline-row(
         textWeight: "regular",
-        textSize: textSize4,
+        textSize: textSize3,
         textColor: black,
         number: number,
         title: title,
