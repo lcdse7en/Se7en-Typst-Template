@@ -163,10 +163,13 @@
 
   show grid: set block(above: 0.95em, below: 0.95em)
 
+  show emph: text.with(font: "LXGW WenKai GB")
+
   show math.equation: set text(font: (
     "New Computer Modern Math",
-    "DejaVu Sans",
-    "Yu Gothic",
+    "LXGW WenKai GB",
+    // "DejaVu Sans",
+    // "Yu Gothic",
   ))
   show figure.where(kind: table): set figure(supplement: "表")
   show figure.where(kind: table): set figure.caption(position: top)
@@ -185,11 +188,8 @@
   }
   show figure: set block(breakable: true)
 
-  let accent-color = eastern
-  let ghost-color = rgb(50%, 50%, 50%, 50%)
   set list(spacing: 0.65em, indent: 0em, marker: (
-    // text(size: 0.6em, baseline: +0.2em, "➤", fill: ghost-color),
-    text(size: 0.6em, baseline: +0.2em, "➤", fill: luma(0)),
+    text(font: "Helvetica Neue",size: 0.6em, baseline: +0.3em, "➤", fill: luma(0)),
     text(font: "Menlo", size: 1.2em, baseline: -0.1em, "•", fill: luma(0)),
   ))
 
@@ -208,9 +208,12 @@
     font: (
       // Englisgh
       // "Menlo",
+      (name: "Helvetica", covers: regex("[a-zA-Z0-9’—]")),
+      // (name: "Helvetica", covers: "latin-in-cjk"),
       "Segoe UI",
       // Chinese
       "Microsoft YaHei",
+      "Source Han Serif SC",
       // Korea
       "SeoulNamsan M",
       "SeoulHangang M",
@@ -232,6 +235,8 @@
   // Blocs de code inline
   show raw.where(block: false): set text(fill: white)
 
+  show raw: text.with(font: "Cascadia Code")
+
   show ref: it => {
     if it.element == none {
       it
@@ -244,9 +249,15 @@
       it
     } else if it.element.func() == heading and it.element.level == 1 {
       // 見出しは見出しのナンバリングをそのまま使用
-      link(it.element.location(), numbering(heading.numbering, ..counter(
-        heading,
-      ).at(it.element.location())).trim())
+      link(
+        it.element.location(),
+        numbering(
+          heading.numbering,
+          ..counter(
+            heading,
+          ).at(it.element.location()),
+        ).trim(),
+      )
     } else {
       it
     }
@@ -530,8 +541,8 @@
       place(bottom, cover)
     }
     #if logo != none {
-      set image(width: 3cm)
-      place(top + center, pad(top: 1cm, logo))
+      set image(width: 20em)
+      place(top + center, pad(top: 3cm, logo))
     }
     #align(center + horizon, block(
       width: 100%,
@@ -551,7 +562,8 @@
   if (copyright != none) {
     set text(size: 10pt)
     show link: it => [
-      #set text(fill: main-color)
+      // #set text(fill: main-color)
+      #set text(fill: rgb(0, 0, 255))
       #it
     ]
     set par(spacing: 2em)
